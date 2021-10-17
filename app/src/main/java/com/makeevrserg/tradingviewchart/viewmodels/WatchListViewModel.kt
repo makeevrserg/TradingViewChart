@@ -23,7 +23,7 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
         repeat(decimals) { multiplier *= 10 }
         return kotlin.math.round(this * multiplier) / multiplier
     }
-
+	//Test gitFlow
     init {
         val item1 = WatchListItem(
             "",
