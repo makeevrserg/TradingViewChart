@@ -1,0 +1,90 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <variable
+            name="listItem"
+            type="com.makeevrserg.tradingview.adapters.WatchListItem" />
+
+        <variable
+            name="clickListener"
+            type="com.makeevrserg.tradingviewchart.adapters.ItemListener" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v)->clickListener.onClick(listItem,v)}"
+        android:padding="10dp">
+
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic__google"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{listItem.title}"
+            android:textColor="?colorOnPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
+            app:layout_constraintTop_toTopOf="@+id/imageViewLogo" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{listItem.desc}"
+            android:textColor="?subtitleTextColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLogo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(listItem.value)}"
+            android:textColor="?colorOnPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewLogo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="@{listItem.changeToString()}"
+            android:textColor='@{(listItem.isPositive())?Color.parseColor("#37A173"):Color.parseColor("#F44336")}'
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo"
+            app:layout_constraintEnd_toStartOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{listItem.percentChangeToString()}"
+            android:textColor='@{(listItem.isPositive())?Color.parseColor("#37A173"):Color.parseColor("#F44336")}'
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

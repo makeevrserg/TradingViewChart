@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/watchListFragment">
+
+    <fragment
+        android:id="@+id/chartPreviewFragment"
+        android:name="com.makeevrserg.tradingview.ui.ChartPreviewFragment"
+        tools:layout="@layout/chart_preview_fragment"/>
+    <fragment
+        android:id="@+id/watchListFragment"
+        android:name="com.makeevrserg.tradingview.ui.WatchListFragment"
+        android:label="Watchlist"
+        tools:layout="@layout/watch_list_fragment">
+        <action
+            android:id="@+id/action_watchListFragment_to_chartPreviewFragment"
+            app:destination="@id/chartPreviewFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left" />
+    </fragment>
+</navigation>

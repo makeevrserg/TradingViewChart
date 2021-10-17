@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KChart">
+        <attr name="candleBodySize" format="dimension" />
+        <attr name="candleStringSize" format="dimension" />
+
+        <attr name="mTextSize" format="dimension" />
+        <attr name="mTextColor" format="color" />
+
+        <attr name="minScaleX" format="dimension" />
+        <attr name="minScaleY" format="dimension" />
+        <attr name="maxScaleY" format="dimension" />
+        <attr name="maxScaleX" format="dimension" />
+        <attr name="ScaleX" format="dimension" />
+        <attr name="ScaleY" format="dimension" />
+
+        <attr name="spaceBetweenText" format="dimension" />
+    </declare-styleable>
+</resources>

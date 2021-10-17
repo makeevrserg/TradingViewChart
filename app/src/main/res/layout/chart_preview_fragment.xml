@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.graphics.Color" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.makeevrserg.tradingview.viewmodels.ChartPreviewViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:src="@drawable/ic__google" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="GOOG"
+            android:textAlignment="center"
+            android:textColor="?colorOnPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Alphabet Inc (Google) Class C • NASDAQ"
+            android:textAlignment="center"
+            android:textColor="?subtitleTextColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="2913.02"
+                android:textAlignment="center"
+                android:textColor="?colorOnPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:text="USD"
+                android:textColor="?subtitleTextColor"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+14.10 +0.51%"
+            android:textAlignment="center"
+            android:textColor='@{(viewModel.watchListItem.isPositive())?Color.parseColor("#37A173"):Color.parseColor("#F44336")}'
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <com.makeevrserg.tradingviewchart.chart.KChart
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:mTextColor="?subtitleTextColor"
+            app:ScaleX="1000dp"
+            app:ScaleY="1000dp"
+            app:candleBodySize="15dp"
+            app:candleStringSize="5dp"
+            app:mTextSize="12sp"
+            app:maxScaleX="2000dp"
+            app:maxScaleY="2000dp"
+            app:minScaleX="1000dp"
+            app:minScaleY="1000dp"
+            app:spaceBetweenText="15dp" />
+
+
+    </LinearLayout>
+</layout>
