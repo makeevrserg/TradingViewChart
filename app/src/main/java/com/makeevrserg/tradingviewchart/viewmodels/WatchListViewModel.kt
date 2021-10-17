@@ -1,23 +1,14 @@
 package com.makeevrserg.tradingview.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.makeevrserg.tradingview.adapters.WatchListItem
-import com.makeevrserg.tradingviewchart.network.RestClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.await
 import kotlin.random.Random
 
 class WatchListViewModel(application: Application) : AndroidViewModel(application) {
 
-    companion object{
-        private val TAG = "WatchListViewModel"
-    }
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
@@ -31,13 +22,6 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
         var multiplier = 1f
         repeat(decimals) { multiplier *= 10 }
         return kotlin.math.round(this * multiplier) / multiplier
-    }
-    val restService = RestClient.retrofitService
-    fun loadWatchLists(){
-        viewModelScope.launch(Dispatchers.IO){
-            val watchLists = restService.fetchWatchListsList().await()
-            Log.d(TAG, "loadWatchLists: $watchLists")
-        }
     }
 
     init {
