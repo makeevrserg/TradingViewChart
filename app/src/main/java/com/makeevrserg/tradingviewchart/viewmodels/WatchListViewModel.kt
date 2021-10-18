@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.await
 import java.lang.Exception
+import java.util.*
 import kotlin.random.Random
 
 class WatchListViewModel(application: Application) : AndroidViewModel(application) {
@@ -125,6 +126,13 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
             }
             _watchListItems.postValue(list)
         }
+    }
+
+    fun onListReorganized(fromPosition: Int, toPosition: Int) {
+        val fromItem = _watchListItems.value?.get(fromPosition) ?:return
+        val toItem = _watchListItems.value?.get(toPosition) ?:return
+        _watchListItems.value?.set(fromPosition,toItem)
+        _watchListItems.value?.set(toPosition,fromItem)
     }
 
 
