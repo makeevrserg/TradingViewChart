@@ -7,16 +7,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.makeevrserg.tradingviewchart.adapters.ItemListener
 import com.makeevrserg.tradingviewchart.adapters.WatchListAdapter
 import com.makeevrserg.tradingview.viewmodels.WatchListViewModel
 import com.makeevrserg.tradingviewchart.R
 import com.makeevrserg.tradingviewchart.databinding.WatchListFragmentBinding
+import androidx.recyclerview.widget.RecyclerView
+
 
 class WatchListFragment : Fragment() {
 
@@ -50,6 +49,8 @@ class WatchListFragment : Fragment() {
                     WatchListFragmentDirections.actionWatchListFragmentToChartPreviewFragment(group.title)
                 )
         })
+        val itemTouchHelper = ItemTouchHelper(dragCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
         binding.recyclerView.adapter = adapter
         //viewModel.observe
         viewModel.watchListItem.observe(viewLifecycleOwner, {
@@ -97,5 +98,28 @@ class WatchListFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+    var dragCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
+        ItemTouchHelper.LEFT
+    ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            val fromPosition = viewHolder.adapterPosition
+            val toPosition = target.adapterPosition
+            viewModel.onListReorganized(fromPosition,toPosition)
+            recyclerView.adapter!!.notifyItemMoved(fromPosition, toPosition)
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+        }
+    }
+
 
 }
