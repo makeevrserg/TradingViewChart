@@ -3,6 +3,7 @@ package com.makeevrserg.tradingview.ui
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -28,7 +29,7 @@ class WatchListFragment : Fragment() {
 
 //        (requireActivity() as MainActivity).title = "Watchlist"
     }
-
+    lateinit var adapter:WatchListAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +42,7 @@ class WatchListFragment : Fragment() {
         //RecyclerView
         setHasOptionsMenu(true)
 
-        val adapter = WatchListAdapter(ItemListener { group, view ->
+        adapter = WatchListAdapter(ItemListener { group, view ->
 
             this.findNavController()
                 .navigate(
@@ -61,6 +62,20 @@ class WatchListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.watchlist_menu,menu)
+        val menuItem =  menu.findItem(R.id.action_search)
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                adapter.filter.filter(p0?:return false)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter.filter.filter(p0?:return false)
+                return true
+            }
+
+        })
         super.onCreateOptionsMenu(menu, inflater)
     }
 

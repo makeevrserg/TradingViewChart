@@ -12,8 +12,8 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
-    private val _watchListItems = MutableLiveData<List<WatchListItem>>()
-    public val watchListItem: LiveData<List<WatchListItem>>
+    private val _watchListItems = MutableLiveData<MutableList<WatchListItem>>()
+    public val watchListItem: LiveData<MutableList<WatchListItem>>
         get() = _watchListItems
 
     fun Random.nextFloat(from: Float, until: Float) =
@@ -27,7 +27,7 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         val item1 = WatchListItem(
             "",
-            "GOOG",
+            "12345",
             "Non-Alphabet Inc (Non-Google) Class D",
             Random.nextFloat(100f,200f),
             Random.nextFloat(-1f,-0.11f),
@@ -35,7 +35,7 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
         )
         val item2 = WatchListItem(
             "",
-            "GOOG",
+            "678",
             "Non-Alphabet Inc (Non-Google) Class D",
             Random.nextFloat(100f,200f),
             Random.nextFloat(-1f,-0.11f),
@@ -43,7 +43,7 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
         )
         val item3 = WatchListItem(
             "",
-            "GOOG",
+            "90",
             "Non-Alphabet Inc (Non-Google) Class D",
             Random.nextFloat(100f,500f),
             Random.nextFloat(2f,3f),
@@ -57,6 +57,6 @@ class WatchListViewModel(application: Application) : AndroidViewModel(applicatio
             Random.nextFloat(2f,3f),
             Random.nextFloat(5f,12f),
         )
-        _watchListItems.value = listOf(item1, item2, item3, item4)
+        _watchListItems.value = mutableListOf(item1, item2, item3, item4)
     }
 }
