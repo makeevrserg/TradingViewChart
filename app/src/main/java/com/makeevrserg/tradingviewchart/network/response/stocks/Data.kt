@@ -9,4 +9,7 @@ data class Data(
     val `open`: Double,
     val symbol: String,
     val volume: Int
-)
+) {
+    fun isLow() = open > close
+    fun isHigh() = open < close
+}

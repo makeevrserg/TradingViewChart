@@ -22,7 +22,6 @@ class ChartPreviewFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = "GOOG"
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +33,15 @@ class ChartPreviewFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val arguments = com.makeevrserg.tradingview.ui.ChartPreviewFragmentArgs.fromBundle(requireArguments())
+        viewModel.loadChart(arguments.symbolName)
+
+        viewModel.toolbarTitle.observe(viewLifecycleOwner,{
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = it
+        })
+        viewModel.watchListData.observe(viewLifecycleOwner,{
+            binding.lineView.update(it)
+        })
         return binding.root
     }
 

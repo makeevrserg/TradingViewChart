@@ -84,14 +84,14 @@
 
             app:mTextColor="?subtitleTextColor"
             app:ScaleX="1000dp"
-            app:ScaleY="1000dp"
+            app:ScaleY="100dp"
             app:candleBodySize="15dp"
             app:candleStringSize="5dp"
             app:mTextSize="12sp"
             app:maxScaleX="2000dp"
             app:maxScaleY="2000dp"
             app:minScaleX="1000dp"
-            app:minScaleY="1000dp"
+            app:minScaleY="100dp"
             app:spaceBetweenText="15dp" />
 
 

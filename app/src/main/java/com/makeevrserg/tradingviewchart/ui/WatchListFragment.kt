@@ -3,6 +3,7 @@ package com.makeevrserg.tradingview.ui
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -46,7 +47,7 @@ class WatchListFragment : Fragment() {
 
             this.findNavController()
                 .navigate(
-                    WatchListFragmentDirections.actionWatchListFragmentToChartPreviewFragment()
+                    WatchListFragmentDirections.actionWatchListFragmentToChartPreviewFragment(group.title)
                 )
         })
         binding.recyclerView.adapter = adapter
@@ -79,5 +80,22 @@ class WatchListFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_settings->{
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Выберите список")
+                builder.setItems(viewModel.getWatchListTitles()?.toTypedArray()?:return super.onOptionsItemSelected(item)) { dialog, which ->
+                    viewModel.onWatchListSelected(which)
+                }
+
+                val dialog = builder.create()
+                dialog.show()
+                return true
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 }
