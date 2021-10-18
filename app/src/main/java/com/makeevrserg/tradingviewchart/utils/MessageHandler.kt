@@ -5,7 +5,7 @@ package com.makeevrserg.tradingview.utils
  * После сворачивания/разворачивания приложений observer моежет заново обсервнуть LiveData.
  * Чтобы этого не происходило - для одноразовых сообщений используется этот класс.
  */
-class MessageHandler(private val content: String) {
+class MessageHandler(private val content: String?) {
 
     /**
      * При создании класса эвент считаетсся включенным

@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/chartPreviewFragment"
         android:name="com.makeevrserg.tradingview.ui.ChartPreviewFragment"
-        tools:layout="@layout/chart_preview_fragment"/>
+        tools:layout="@layout/chart_preview_fragment">
+        <argument
+            android:name="symbolName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/watchListFragment"
         android:name="com.makeevrserg.tradingview.ui.WatchListFragment"
